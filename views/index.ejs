@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>หน้าแรก</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>หน้าแรก</h1>
+    </div>
+    <%- include layout %>
+    <nav class="navbar navbar-expand-lg">
+      <div class="navbar-nav">
+          <a class="nav-item nav-link" href="/">หน้าแรก</a>
+          <a class="nav-item nav-link" href="/products">สินค้าทั้งหมด</a>
+          <a class="nav-item nav-link" href="/manages">จัดการสินค้า</a>
+          <a class="nav-item nav-link" href="/contact">ช่องทางติดต่อ</a>
+      </div>
+  </nav>
+
+    <div id="main">
+      <div id="content">
+        <h2>สินค้าที่ใกล้หมด</h2>
+        <table id="result">
+          <tr>
+            <th id="name">ชื่อ</th>
+            <th id="price">ราคา (บาท)</th>
+            <th id="number">จำนวนสินค้า</th>
+          </tr>
+          <% Object.values(manages).forEach(function(product){ %> <%
+            if(product.number <= product.dangerNumber) { %>
+            <tr>
+              <td id="name"><%= product.name %></td>
+              <td id="price"><%= product.price %></td>
+              <td id="number" style="color: red"><%= product.number %></td>
+            </tr>
+            <% } %> <% }) %>
+        </table>
+        <h2>รายการสินค้า</h2>
+        <table id="lists">
+          <tr>
+            <th id="name">ชื่อ</th>
+            <th id="price">ราคา (บาท)</th>
+            <th id="number">จำนวนสินค้า</th>
+          </tr>
+          <% Object.values(manages).forEach(function(product){ %>
+            <tr>
+              <td id="name"><%= product.name %></td>
+              <td id="price"><%= product.price %></td>
+              <% if(product.number >= product.safeNumber){ %>
+              <td id="number" style="color: green"><%= product.number %></td>
+              <% }else if(product.number >= product.dangerNumber) {%>
+              <td id="number" style="color: orange"><%= product.number %></td>
+              <% }else { %>
+              <td id="number" style="color: red"><%= product.number %></td>
+              <% } %>
+            </tr>
+            <% }) %>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+

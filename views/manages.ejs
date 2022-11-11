@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จัดการสินค้า</title>
+    <link rel='stylesheet' href='/stylesheets/manage.css'/>
+</head>
+<body>
+    <div class="header">
+        <h1>จัดการสินค้า</h1>
+    </div>
+    <%- include layout %>
+    <nav class="navbar navbar-expand-lg">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/">หน้าแรก</a>
+            <a class="nav-item nav-link" href="/products">สินค้าทั้งหมด</a>
+            <a class="nav-item nav-link" href="/manages">จัดการสินค้า</a>
+            <a class="nav-item nav-link" href="/contact">ช่องทางติดต่อ</a>
+        </div>
+    </nav>
+    <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+        if(error.param=='number' ){ %>
+        <li id="li" class="alert alert-danger">
+            <%= error.msg %>
+        </li>
+    <% } } )} %>
+    <div id="main">
+        <div id="content">
+            <a href="/manages/addProduct"><input type="button" class="btn btn-primary float-right" name="" id="create" value="เพิ่มสินค้า"></a>
+
+            <div id="content">
+                <h2>การค้นหา</h2>
+                <div id="searchWrapper">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="กรุณาใส่ชื่อสินค้า" title="Type in a name">
+                <h2>รายการสินค้า</h2>
+                <table id="list">
+                    <tr id="headerTitle">
+                        <th id="name">ชื่อ</th>
+                        <th id="price">ราคา (บาท)</th>
+                        <th id="number">จำนวนสินค้า</th>
+                        <th id="dnumber">จำนวนที่ใกล้หมด</th>
+                        <th id="snumber">จำนวนที่มีอยู่มาก</th>
+                        <th id="inputs">จำนวนที่เพิ่ม/ลด</th>
+                        <th id="add">เพิ่ม</th>
+                        <th id="sub">ลด</th>
+                        <th id="edit">แก้ไข</th>
+                        <th id="del">ลบ</th>
+                    </tr>
+                    <% Object.values(manages).forEach(function(product){ %>
+                        <tr>
+                            <td id="name"><%= product.name %></td>
+                            <td id="price"><%= product.price %></td>
+                            <% if(product.number >= product.safeNumber){ %>
+                            <td id="number" style="color: green"><%= product.number %></td>
+                            <% }else if(product.number >= product.dangerNumber) { %>
+                            <td id="number" style="color: orange"><%= product.number %></td>
+                            <% }else { %>
+                            <td id="number" style="color: red"><%= product.number %></td>
+                            <% } %>
+                            <td id="dnumber"><%= product.dangerNumber %></td>
+                            <td id="snumber"><%= product.safeNumber %></td>
+                            <form action="/manages/updateNumber" method="POST">
+                                <div class="form-group">
+                                    <td id="inputs">
+                                        <input type="hidden" name="edit_id" value="<%= product._id %>">
+                                        <input  type="text" name="number" value="" class="form-control" id="input" >
+                                    </td>
+                                </div>
+                                <td id="add"><button type="submit" name="operator" class="btn btn-secondary" value="plus">เพิ่ม</button></td>
+                                <td id="sub"><button type="submit" name="operator" class="btn btn-secondary" value="minus">ลด</button></td>
+                            </form>
+
+                            <td id="edit">
+                                <!-- <a href="/manages/<%= product._id %>"><input type="button" class="btn btn-info" name="" value="แก้ไข" id="edit" style="margin-right:5%;"></a>  -->
+                                <form action="/manages/edit" method="POST">
+                                    <input type="hidden" name="edit_id" value="<%= product._id %>">
+                                    <button type="submit" class="btn btn-info">แก้ไข</button>
+                                </form>
+                            </td>
+                            <td id="del"><a href="/manages/delete/<%= product._id %>" onclick="return confirm('ต้องการลบข้อมูลนี้หรือไม่ ?')">
+                                <div class="text-center"><button type="submit" class="btn btn-danger float-center">ลบ</button></a></div>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="/javascripts/manage.js"></script>

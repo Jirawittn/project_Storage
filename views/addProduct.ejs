@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        เพิ่มสินค้า
+    </title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/addProduct.css' />
+</head>
+
+<body>
+    <div class="header">
+        <h1>เพิ่มสินค้า</h1>
+    </div>
+    <%- include layout %>
+    <nav class="navbar navbar-expand-lg">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/">หน้าแรก</a>
+            <a class="nav-item nav-link" href="/products">สินค้าทั้งหมด</a>
+            <a class="nav-item nav-link" href="/manages">จัดการสินค้า</a>
+            <a class="nav-item nav-link" href="/contact">ช่องทางติดต่อ</a>
+        </div>
+    </nav>
+        <div id="main">
+            <div class="container">
+                    <form class="" action="/manages/addProduct" method="POST">
+                        <div class="form-group">
+                            <label for="">ชื่อสินค้า</label> 
+                            <div class="" id="error-msg">
+                                <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+                                    if(error.param=='name' ){ %>
+                                    <li id="li" class="alert alert-danger float-right">
+                                        <%= error.msg %>
+                                    </li>
+                                <% } } )}%>
+                            </div>
+                            <input type="text" name="name" value="" class="form-control" id="input">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="">ราคาขาย (บาท)</label>
+                            <div class="" id="error-msg">
+                                <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+                                    if(error.param=='price' ){ %>
+                                    <li id="li" class="alert alert-danger float-right">
+                                        <%= error.msg %>
+                                    </li>
+                                <% } } )}%>
+                            </div>
+                            <input type="text" name="price" value="" class="form-control" id="input">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="">จำนวนสินค้า</label>
+                            <div class=""id="error-msg">
+                                <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+                                    if(error.param=='number' ){ %>
+                                    <li id="li" class="alert alert-danger float-right">
+                                        <%= error.msg %>
+                                    </li>
+                                <% } } )}%>
+                            </div>
+                            <input type="text" name="number" value="" class="form-control" id="input">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="">จำนวนที่ใกล้หมด</label>
+                            <div class="" id="error-msg">
+                                <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+                                    if(error.param=='dangerNumber' ){ %>
+                                    <li id="li" class="alert alert-danger float-right">
+                                        <%= error.msg %>
+                                    </li>
+                                <% } } )}%>
+                            </div>
+                            <input type="text" name="dangerNumber" value="" class="form-control" id="input">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="">จำนวนที่มีอยู่มาก</label>
+                            <div class="" id="error-msg">
+                                <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+                                    if(error.param=='safeNumber' ){ %>
+                                    <li id="li" class="alert alert-danger float-right">
+                                        <%= error.msg %>
+                                    </li>
+                                <% } } )}%>
+                            </div>
+                            <input type="text" name="safeNumber" value="" class="form-control" id="input">  
+                        </div>
+
+                        <input type="submit" name="" value="บันทึก" class="btn btn-primary">
+                        <a href="/manages"><input type="button" name="" value="กลับ" class="btn btn-danger"></a>
+                    </form>
+            </div>
+        </div>
+</body>
+
+</html>

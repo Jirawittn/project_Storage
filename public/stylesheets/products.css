@@ -1,0 +1,98 @@
+/*- - */
+table,
+td,
+th {
+  border: 0.5px black solid;
+  text-align: left;
+  padding: 10px;
+  font-size: 20px;
+}
+table {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+}
+tr:nth-child(odd) {
+  background-color: rgb(213, 213, 213);
+}
+
+tr th {
+  background: lightgoldenrodyellow;
+}
+tr {
+  background-color: aliceblue;
+}
+p,
+li {
+  font-size: 16px;
+  line-height: 3;
+  letter-spacing: 1px;
+}
+
+ol.i {
+  list-style-type: lower-roman;
+}
+h2 {
+  padding: 15px 0px;
+}
+
+nav {
+  display: none;
+  margin: 10px;
+  margin-bottom: 50px;
+}
+
+#login form p input {
+  width: 50%;
+}
+
+.sub {
+  margin-top: -10px;
+  margin-bottom: 0px;
+}
+
+.se {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+th,
+td {
+  text-indent: 20px;
+}
+
+tr td:nth-child(2),
+tr td:nth-child(3),
+tr td:nth-child(4),
+tr td:nth-child(5),
+tr td:nth-child(6) {
+  text-align: center;
+}
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+#name {
+  width: 40%;
+  font-weight: bold;
+}
+#price {
+  width: 15%;
+  font-weight: bold;
+}
+#number {
+  width: 15%;
+  font-weight: bold;
+}
+#dnumber {
+  width: 15%;
+  font-weight: bold;
+}
+#snumber {
+  width: 15%;
+  font-weight: bold;
+}
+#myInput {
+  width: 40%;
+  height: 40px;
+  padding:0 20px ;
+}
